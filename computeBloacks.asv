@@ -1,0 +1,32 @@
+img = imread('tiger.jpg');
+box = [0, 0, 500, 500];    
+outImage= insertObjectAnnotation(img,'rectangle',box,'','LineWidth',5,'Color',{'yellow'},'TextColor','black');
+figure, imshow(outImage), title('Image with rectangle');
+B1 = [0,0,0,0,0,0,0,0];
+B2 = [0,0,0,0,0,0,0,0];
+B1 = reshape(B1,[4,4]);
+B2 = reshape(B2,[4,4]);
+for Tr = 1:size(img,1)-4
+    for Tc = 1:size(img,2)-4
+        
+        for tr = 1:4
+            for tc = 1:4
+                B1(tr,tc,1) = img(Tr+,Tc,1);
+            end
+        end
+        B1(1,1,1) = img(Tr,Tc,1);
+        B1(2,1,1) = img(Tr+1,Tc,1);
+        B1(3,1,1) = img(Tr+1,Tc,1)
+        B1(4,1,1) = img(Tr+1,Tc,1)
+        B1(1,2,1) = img(Tr,Tc+1,1);
+        B1(2,2,1) = img(Tr+1,Tc+1,1);
+        for Rr = 1:size(img,1)-4
+            for Rc = 1:size(img,2)-4
+               B2(1,1,1) = img(Rr,Rc,1);
+               B2(2,1,1) = img(Rr+1,Rc,1);
+               B2(1,2,1) = img(Rr,Rc+1,1);
+               B2(2,2,1) = img(Rr+1,Rc+1,1); 
+            end
+        end
+    end 
+end
